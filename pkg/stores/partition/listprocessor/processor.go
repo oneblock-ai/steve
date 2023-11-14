@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/rancher/apiserver/pkg/types"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 	"github.com/rancher/wrangler/v2/pkg/data"
 	"github.com/rancher/wrangler/v2/pkg/data/convert"
 	corecontrollers "github.com/rancher/wrangler/v2/pkg/generated/controllers/core/v1"

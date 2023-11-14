@@ -1,11 +1,12 @@
 package accesscontrol
 
 import (
-	apiserver "github.com/rancher/apiserver/pkg/server"
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/steve/pkg/attributes"
+	apiserver "github.com/oneblock-ai/apiserver/v2/pkg/server"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 	"github.com/rancher/wrangler/v2/pkg/kv"
 	"k8s.io/apimachinery/pkg/runtime/schema"
+
+	"github.com/oneblock-ai/steve/v2/pkg/attributes"
 )
 
 type AccessControl struct {

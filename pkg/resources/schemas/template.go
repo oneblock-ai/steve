@@ -7,17 +7,18 @@ import (
 	"sync"
 	"time"
 
-	"github.com/rancher/apiserver/pkg/builtin"
-	schemastore "github.com/rancher/apiserver/pkg/store/schema"
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/steve/pkg/accesscontrol"
-	"github.com/rancher/steve/pkg/schema"
+	"github.com/oneblock-ai/apiserver/v2/pkg/builtin"
+	schemastore "github.com/oneblock-ai/apiserver/v2/pkg/store/schema"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 	"github.com/rancher/wrangler/v2/pkg/broadcast"
 	"github.com/rancher/wrangler/v2/pkg/schemas/validation"
 	"github.com/sirupsen/logrus"
 	"k8s.io/apimachinery/pkg/api/equality"
 	"k8s.io/apiserver/pkg/authentication/user"
 	"k8s.io/apiserver/pkg/endpoints/request"
+
+	"github.com/oneblock-ai/steve/v2/pkg/accesscontrol"
+	"github.com/oneblock-ai/steve/v2/pkg/schema"
 )
 
 // SetupWatcher create a new schema.Store for tracking schema changes

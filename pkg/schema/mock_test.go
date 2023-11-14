@@ -5,9 +5,10 @@ import (
 	"encoding/hex"
 	"hash"
 
-	"github.com/rancher/steve/pkg/accesscontrol"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apiserver/pkg/authentication/user"
+
+	"github.com/oneblock-ai/steve/v2/pkg/accesscontrol"
 )
 
 const (

@@ -3,12 +3,12 @@ package apigroups
 import (
 	"net/http"
 
-	"github.com/rancher/steve/pkg/schema"
-
-	"github.com/rancher/apiserver/pkg/store/empty"
-	"github.com/rancher/apiserver/pkg/types"
+	"github.com/oneblock-ai/apiserver/v2/pkg/store/empty"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/discovery"
+
+	"github.com/oneblock-ai/steve/v2/pkg/schema"
 )
 
 func Template(discovery discovery.DiscoveryInterface) schema.Template {

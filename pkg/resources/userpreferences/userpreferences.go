@@ -3,7 +3,7 @@ package userpreferences
 import (
 	"net/http"
 
-	"github.com/rancher/apiserver/pkg/types"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 )
 
 type UserPreference struct {

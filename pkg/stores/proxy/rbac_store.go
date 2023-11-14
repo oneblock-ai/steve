@@ -4,14 +4,15 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/steve/pkg/accesscontrol"
-	"github.com/rancher/steve/pkg/attributes"
-	"github.com/rancher/steve/pkg/stores/partition"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 	"github.com/rancher/wrangler/v2/pkg/kv"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/util/sets"
 	"k8s.io/apimachinery/pkg/watch"
+
+	"github.com/oneblock-ai/steve/v2/pkg/accesscontrol"
+	"github.com/oneblock-ai/steve/v2/pkg/attributes"
+	"github.com/oneblock-ai/steve/v2/pkg/stores/partition"
 )
 
 var (

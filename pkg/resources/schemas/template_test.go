@@ -9,16 +9,17 @@ import (
 	"time"
 
 	"github.com/golang/mock/gomock"
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/steve/pkg/accesscontrol"
-	acfake "github.com/rancher/steve/pkg/accesscontrol/fake"
-	"github.com/rancher/steve/pkg/attributes"
-	"github.com/rancher/steve/pkg/resources/schemas"
-	schemafake "github.com/rancher/steve/pkg/schema/fake"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 	v1schema "github.com/rancher/wrangler/v2/pkg/schemas"
 	"github.com/stretchr/testify/assert"
 	"k8s.io/apiserver/pkg/authentication/user"
 	"k8s.io/apiserver/pkg/endpoints/request"
+
+	"github.com/oneblock-ai/steve/v2/pkg/accesscontrol"
+	acfake "github.com/oneblock-ai/steve/v2/pkg/accesscontrol/fake"
+	"github.com/oneblock-ai/steve/v2/pkg/attributes"
+	"github.com/oneblock-ai/steve/v2/pkg/resources/schemas"
+	schemafake "github.com/oneblock-ai/steve/v2/pkg/schema/fake"
 )
 
 var setupTimeout = time.Millisecond * 50

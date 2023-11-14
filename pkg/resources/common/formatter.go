@@ -3,13 +3,7 @@ package common
 import (
 	"strings"
 
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/steve/pkg/accesscontrol"
-	"github.com/rancher/steve/pkg/attributes"
-	"github.com/rancher/steve/pkg/schema"
-	metricsStore "github.com/rancher/steve/pkg/stores/metrics"
-	"github.com/rancher/steve/pkg/stores/proxy"
-	"github.com/rancher/steve/pkg/summarycache"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 	"github.com/rancher/wrangler/v2/pkg/data"
 	corecontrollers "github.com/rancher/wrangler/v2/pkg/generated/controllers/core/v1"
 	"github.com/rancher/wrangler/v2/pkg/slice"
@@ -18,6 +12,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	schema2 "k8s.io/apimachinery/pkg/runtime/schema"
+
+	"github.com/oneblock-ai/steve/v2/pkg/accesscontrol"
+	"github.com/oneblock-ai/steve/v2/pkg/attributes"
+	"github.com/oneblock-ai/steve/v2/pkg/schema"
+	metricsStore "github.com/oneblock-ai/steve/v2/pkg/stores/metrics"
+	"github.com/oneblock-ai/steve/v2/pkg/stores/proxy"
+	"github.com/oneblock-ai/steve/v2/pkg/summarycache"
 )
 
 func DefaultTemplate(clientGetter proxy.ClientGetter,

@@ -3231,9 +3231,11 @@ func (m mockNamespaceCache) Get(name string) (*corev1.Namespace, error) {
 func (m mockNamespaceCache) List(selector labels.Selector) ([]*corev1.Namespace, error) {
 	panic("not implemented")
 }
+
 func (m mockNamespaceCache) AddIndexer(indexName string, indexer generic.Indexer[*corev1.Namespace]) {
 	panic("not implemented")
 }
+
 func (m mockNamespaceCache) GetByIndex(indexName, key string) ([]*corev1.Namespace, error) {
 	panic("not implemented")
 }

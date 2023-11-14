@@ -1,18 +1,19 @@
 package schema
 
-//go:generate mockgen --build_flags=--mod=mod -package fake -destination fake/factory.go "github.com/rancher/steve/pkg/schema" Factory
+//go:generate mockgen --build_flags=--mod=mod -package fake -destination fake/factory.go "github.com/oneblock-ai/steve/v2/pkg/schema" Factory
 import (
 	"context"
 	"fmt"
 	"net/http"
 	"time"
 
-	"github.com/rancher/apiserver/pkg/builtin"
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/steve/pkg/accesscontrol"
-	"github.com/rancher/steve/pkg/attributes"
+	"github.com/oneblock-ai/apiserver/v2/pkg/builtin"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apiserver/pkg/authentication/user"
+
+	"github.com/oneblock-ai/steve/v2/pkg/accesscontrol"
+	"github.com/oneblock-ai/steve/v2/pkg/attributes"
 )
 
 type Factory interface {

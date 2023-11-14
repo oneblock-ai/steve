@@ -5,13 +5,14 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/steve/pkg/attributes"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 	"k8s.io/apiserver/pkg/endpoints/request"
 	"k8s.io/client-go/dynamic"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/metadata"
 	"k8s.io/client-go/rest"
+
+	"github.com/oneblock-ai/steve/v2/pkg/attributes"
 )
 
 type Factory struct {

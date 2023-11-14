@@ -11,8 +11,9 @@ import (
 
 	"github.com/gorilla/websocket"
 	"github.com/rancher/remotedialer"
-	"github.com/rancher/steve/pkg/auth"
 	"github.com/sirupsen/logrus"
+
+	"github.com/oneblock-ai/steve/v2/pkg/auth"
 )
 
 const (

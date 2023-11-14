@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"sync"
 
-	"github.com/rancher/apiserver/pkg/middleware"
+	"github.com/oneblock-ai/apiserver/v2/pkg/middleware"
 	"github.com/sirupsen/logrus"
 )
 
@@ -29,6 +29,7 @@ const (
 )
 
 type StringSetting func() string
+
 type BoolSetting func() bool
 
 type Handler struct {

@@ -6,11 +6,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 	"github.com/pborman/uuid"
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/steve/pkg/attributes"
-	steveschema "github.com/rancher/steve/pkg/schema"
-	"github.com/rancher/steve/pkg/stores/proxy"
 	"github.com/rancher/wrangler/v2/pkg/apply"
 	"github.com/rancher/wrangler/v2/pkg/yaml"
 	"k8s.io/apimachinery/pkg/api/meta"
@@ -18,6 +15,10 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/client-go/dynamic"
 	"k8s.io/client-go/rest"
+
+	"github.com/oneblock-ai/steve/v2/pkg/attributes"
+	steveschema "github.com/oneblock-ai/steve/v2/pkg/schema"
+	"github.com/oneblock-ai/steve/v2/pkg/stores/proxy"
 )
 
 type Apply struct {

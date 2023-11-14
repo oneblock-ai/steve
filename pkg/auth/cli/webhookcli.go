@@ -4,9 +4,10 @@ import (
 	"os"
 	"time"
 
-	"github.com/rancher/steve/pkg/auth"
 	"github.com/urfave/cli"
 	"k8s.io/client-go/tools/clientcmd"
+
+	"github.com/oneblock-ai/steve/v2/pkg/auth"
 )
 
 type WebhookConfig struct {

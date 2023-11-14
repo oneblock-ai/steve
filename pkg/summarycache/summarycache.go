@@ -5,11 +5,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/steve/pkg/attributes"
-	"github.com/rancher/steve/pkg/clustercache"
-	"github.com/rancher/steve/pkg/schema"
-	"github.com/rancher/steve/pkg/schema/converter"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 	"github.com/rancher/wrangler/v2/pkg/slice"
 	"github.com/rancher/wrangler/v2/pkg/summary"
 	"k8s.io/apimachinery/pkg/api/meta"
@@ -17,6 +13,11 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	runtimeschema "k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/client-go/tools/cache"
+
+	"github.com/oneblock-ai/steve/v2/pkg/attributes"
+	"github.com/oneblock-ai/steve/v2/pkg/clustercache"
+	"github.com/oneblock-ai/steve/v2/pkg/schema"
+	"github.com/oneblock-ai/steve/v2/pkg/schema/converter"
 )
 
 const (

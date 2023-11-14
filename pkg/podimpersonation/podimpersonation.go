@@ -7,7 +7,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/rancher/steve/pkg/stores/proxy"
 	"github.com/rancher/wrangler/v2/pkg/condition"
 	"github.com/rancher/wrangler/v2/pkg/randomtoken"
 	"github.com/rancher/wrangler/v2/pkg/schemas/validation"
@@ -24,6 +23,8 @@ import (
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
+
+	"github.com/oneblock-ai/steve/v2/pkg/stores/proxy"
 )
 
 const (

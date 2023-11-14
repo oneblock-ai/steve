@@ -5,9 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/steve/pkg/attributes"
-	"github.com/rancher/steve/pkg/schema"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 	"github.com/rancher/wrangler/v2/pkg/merr"
 	"github.com/rancher/wrangler/v2/pkg/summary/client"
 	"github.com/rancher/wrangler/v2/pkg/summary/informer"
@@ -19,9 +17,13 @@ import (
 	"k8s.io/client-go/dynamic"
 	"k8s.io/client-go/tools/cache"
 	"k8s.io/client-go/util/workqueue"
+
+	"github.com/oneblock-ai/steve/v2/pkg/attributes"
+	"github.com/oneblock-ai/steve/v2/pkg/schema"
 )
 
 type Handler func(gvr schema2.GroupVersionKind, key string, obj runtime.Object) error
+
 type ChangeHandler func(gvr schema2.GroupVersionKind, key string, obj, oldObj runtime.Object) error
 
 type ClusterCache interface {

@@ -12,6 +12,7 @@ type addr string
 func (a addr) String() string {
 	return string(a)
 }
+
 func (a addr) Network() string {
 	return "tcp"
 }

@@ -3,17 +3,18 @@ package handler
 import (
 	"net/http"
 
-	apiserver "github.com/rancher/apiserver/pkg/server"
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/apiserver/pkg/urlbuilder"
-	"github.com/rancher/steve/pkg/accesscontrol"
-	"github.com/rancher/steve/pkg/auth"
-	k8sproxy "github.com/rancher/steve/pkg/proxy"
-	"github.com/rancher/steve/pkg/schema"
-	"github.com/rancher/steve/pkg/server/router"
+	apiserver "github.com/oneblock-ai/apiserver/v2/pkg/server"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
+	"github.com/oneblock-ai/apiserver/v2/pkg/urlbuilder"
 	"github.com/sirupsen/logrus"
 	"k8s.io/apiserver/pkg/endpoints/request"
 	"k8s.io/client-go/rest"
+
+	"github.com/oneblock-ai/steve/v2/pkg/accesscontrol"
+	"github.com/oneblock-ai/steve/v2/pkg/auth"
+	k8sproxy "github.com/oneblock-ai/steve/v2/pkg/proxy"
+	"github.com/oneblock-ai/steve/v2/pkg/schema"
+	"github.com/oneblock-ai/steve/v2/pkg/server/router"
 )
 
 func New(cfg *rest.Config, sf schema.Factory, authMiddleware auth.Middleware, next http.Handler,

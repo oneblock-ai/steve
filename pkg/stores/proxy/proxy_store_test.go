@@ -6,9 +6,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 	"github.com/pkg/errors"
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/steve/pkg/client"
 	"github.com/rancher/wrangler/v2/pkg/schemas"
 	"github.com/stretchr/testify/assert"
 	"golang.org/x/sync/errgroup"
@@ -22,6 +21,8 @@ import (
 	"k8s.io/client-go/dynamic/fake"
 	"k8s.io/client-go/rest"
 	clientgotesting "k8s.io/client-go/testing"
+
+	"github.com/oneblock-ai/steve/v2/pkg/client"
 )
 
 var c *watch.FakeWatcher

@@ -1,11 +1,12 @@
 package table
 
 import (
-	types2 "github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/steve/pkg/attributes"
+	types2 "github.com/oneblock-ai/apiserver/v2/pkg/types"
 	"github.com/rancher/wrangler/v2/pkg/data"
 	types "github.com/rancher/wrangler/v2/pkg/schemas"
 	"github.com/rancher/wrangler/v2/pkg/schemas/mappers"
+
+	"github.com/oneblock-ai/steve/v2/pkg/attributes"
 )
 
 type Column struct {

@@ -3,7 +3,7 @@ package counts
 import (
 	"time"
 
-	"github.com/rancher/apiserver/pkg/types"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 )
 
 // debounceDuration determines how long events will be held before they are sent to the consumer

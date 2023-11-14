@@ -238,8 +238,8 @@ import (
 	"fmt"
 	"context"
 
-	"github.com/rancher/steve/pkg/server"
-	"github.com/rancher/wrangler/pkg/kubeconfig"
+	"github.com/oneblock-ai/steve/v2/pkg/server"
+	"github.com/rancher/wrangler/v2/pkg/kubeconfig"
 )
 
 func steve() error {
@@ -270,10 +270,10 @@ Steve Features
 --------------
 
 Steve's main use is as an opinionated consumer of
-[rancher/apiserver](https://github.com/rancher/apiserver), which it uses to
+[rancher/apiserver](https://github.com/oneblock-ai/apiserver/v2), which it uses to
 dynamically register every Kubernetes API as its own. It implements
 apiserver
-[Stores](https://pkg.go.dev/github.com/rancher/apiserver/pkg/types#Store) to
+[Stores](https://pkg.go.dev/github.com/oneblock-ai/apiserver/v2/pkg/types#Store) to
 use Kubernetes as its data store.
 
 ### Stores
@@ -281,38 +281,38 @@ use Kubernetes as its data store.
 Steve uses apiserver Stores to transform and store data, mainly in Kubernetes.
 The main mechanism it uses is the proxy store, which is actually a series of
 four nested stores and a "partitioner". It can be instantiated by calling
-[NewProxyStore](https://pkg.go.dev/github.com/rancher/steve/pkg/stores/proxy#NewProxyStore).
+[NewProxyStore](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/stores/proxy#NewProxyStore).
 This gives you:
 
 * [`proxy.errorStore`](https://github.com/rancher/steve/blob/master/pkg/stores/proxy/error_wrapper.go) -
   translates any returned errors into HTTP errors
-* [`proxy.WatchRefresh`](https://pkg.go.dev/github.com/rancher/steve/pkg/stores/proxy#WatchRefresh) -
+* [`proxy.WatchRefresh`](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/stores/proxy#WatchRefresh) -
   wraps the nested store's Watch method, canceling the watch if access to the
   watched resource changes
-* [`partition.Store`](https://pkg.go.dev/github.com/rancher/steve/pkg/stores/partition#Store) -
+* [`partition.Store`](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/stores/partition#Store) -
   wraps the nested store's List method and parallelizes the request according
   to the given partitioner, and additionally implements filtering, sorting, and
   pagination on the unstructured data from the nested store
 * [`proxy.rbacPartitioner`](https://github.com/rancher/steve/blob/master/pkg/stores/proxy/rbac_store.go) -
   the partitioner fed to the `partition.Store` which allows it to parallelize
   requests based on the user's access to certain namespaces or resources
-* [`proxy.Store`](https://pkg.go.dev/github.com/rancher/steve/pkg/stores/proxy#Store) -
+* [`proxy.Store`](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/stores/proxy#Store) -
   the Kubernetes proxy store which performs the actual connection to Kubernetes
   for all operations
 
 The default schema additionally wraps this proxy store in
-[`metrics.Store`](https://pkg.go.dev/github.com/rancher/steve/pkg/stores/metrics#Store),
+[`metrics.Store`](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/stores/metrics#Store),
 which records request metrics to Prometheus, by calling
-[`metrics.NewMetricsStore`](https://pkg.go.dev/github.com/rancher/steve/pkg/stores/metrics#NewMetricsStore)
+[`metrics.NewMetricsStore`](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/stores/metrics#NewMetricsStore)
 on it.
 
 Steve provides two additional exported stores that are mainly used by Rancher's
 [catalogv2](https://github.com/rancher/rancher/tree/release/v2.7/pkg/catalogv2)
 package:
 
-* [`selector.Store`](https://pkg.go.dev/github.com/rancher/steve/pkg/stores/selector#Store)
+* [`selector.Store`](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/stores/selector#Store)
   - wraps the list and watch commands with a label selector
-* [`switchschema.Store`](https://pkg.go.dev/github.com/rancher/steve/pkg/stores/switchschema#Store)
+* [`switchschema.Store`](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/stores/switchschema#Store)
   - transforms the object's schema
 
 ### Schemas
@@ -345,7 +345,7 @@ resource for preference storage instead.
 Counts keeps track of the number of resources and updates the count in a
 buffered stream that the dashboard can subscribe to.
 
-#### [Subscribe](https://github.com/rancher/apiserver/tree/master/pkg/subscribe)
+#### [Subscribe](https://github.com/oneblock-ai/apiserver/v2/tree/master/pkg/subscribe)
 
 Steve exposes a websocket endpoint on /v1/subscribe for sending streams of
 events. Connect to the endpoint using a websocket client like websocat:
@@ -354,7 +354,7 @@ events. Connect to the endpoint using a websocket client like websocat:
 websocat -k wss://127.0.0.1:9443/v1/subscribe
 ```
 
-Review the [apiserver](https://github.com/rancher/apiserver#subscribe) guide
+Review the [apiserver](https://github.com/oneblock-ai/apiserver/v2#subscribe) guide
 for details.
 
 In addition to regular Kubernetes resources, steve allows you to subscribe to
@@ -375,8 +375,8 @@ data is always redacted, you could implement a store like this:
 
 ```go
 import (
-	"github.com/rancher/apiserver/pkg/store/empty"
-	"github.com/rancher/apiserver/pkg/types"
+	"github.com/oneblock-ai/apiserver/v2/pkg/store/empty"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 )
 
 type redactStore struct {
@@ -411,7 +411,7 @@ that store:
 
 ```go
 import (
-	"github.com/rancher/steve/pkg/schema"
+	"github.com/oneblock-ai/steve/v2/pkg/schema"
 )
 
 template := schema.Template{
@@ -461,18 +461,18 @@ Steve implements access control on schemas based on the user's RBAC in
 Kubernetes.
 
 The apiserver
-[`Server`](https://pkg.go.dev/github.com/rancher/apiserver/pkg/server#Server)
+[`Server`](https://pkg.go.dev/github.com/oneblock-ai/apiserver/v2/pkg/server#Server)
 object exposes an AccessControl field which is used to customize how access
 control is performed on server requests.
 
 An
-[`accesscontrol.AccessStore`](https://pkg.go.dev/github.com/rancher/steve/pkg/accesscontrol#AccessStore)
+[`accesscontrol.AccessStore`](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/accesscontrol#AccessStore)
 is stored on the schema factory. When a user makes any request, the request
 handler first finds all the schemas that are available to the user. To do this,
 it first retrieves an
-[`accesscontrol.AccessSet`](https://pkg.go.dev/github.com/rancher/steve/pkg/accesscontrol#AccessSet)
+[`accesscontrol.AccessSet`](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/accesscontrol#AccessSet)
 by calling
-[`AccessFor`](https://pkg.go.dev/github.com/rancher/steve/pkg/accesscontrol#AccessStore.AccessFor)
+[`AccessFor`](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/accesscontrol#AccessStore.AccessFor)
 on the user. The AccessSet contains a map of resources and the verbs that can
 be used on them. The AccessSet is calculated by looking up all of the user's
 role bindings and cluster role bindings for the user's name and group. The
@@ -482,14 +482,14 @@ checked for existence in the AccessSet, and filtered out if it is not
 available.
 
 This final set of schemas is inserted into the
-[`types.APIRequest`](https://pkg.go.dev/github.com/rancher/apiserver/pkg/types#APIRequest)
+[`types.APIRequest`](https://pkg.go.dev/github.com/oneblock-ai/apiserver/v2/pkg/types#APIRequest)
 object and passed to the apiserver handler.
 
 ### Authentication
 
 Steve authenticates incoming requests using a customizable authentication
 middleware. The default authenticator in standalone steve is the
-[AlwaysAdmin](https://pkg.go.dev/github.com/rancher/steve/pkg/auth#AlwaysAdmin)
+[AlwaysAdmin](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/auth#AlwaysAdmin)
 middleware, which accepts all incoming requests and sets admin attributes on
 the user. The authenticator can be overridden by passing a custom middleware to
 the steve server:
@@ -497,8 +497,8 @@ the steve server:
 ```go
 import (
 	"context"
-	"github.com/rancher/steve/pkg/server"
-	"github.com/rancher/steve/pkg/auth"
+	"github.com/oneblock-ai/steve/v2/pkg/server"
+	"github.com/oneblock-ai/steve/v2/pkg/auth"
 	"k8s.io/apiserver/pkg/authentication/user"
 )
 
@@ -531,10 +531,10 @@ Once the user is authenticated, if the request is for a Kubernetes resource,
 then steve must proxy the request to Kubernetes, so it needs to transform the
 request. Steve passes the user Info object from the authenticator to a proxy
 handler, either a generic handler or an impersonating handler. The generic
-[Handler](https://pkg.go.dev/github.com/rancher/steve/pkg/proxy#Handler) mainly
+[Handler](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/proxy#Handler) mainly
 sets transport options and cleans up the headers on the request in preparation
 for forwarding it to Kubernetes. The
-[ImpersonatingHandler](https://pkg.go.dev/github.com/rancher/steve/pkg/proxy#ImpersonatingHandler)
+[ImpersonatingHandler](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/proxy#ImpersonatingHandler)
 uses the user Info object to set Impersonate-* headers on the request, which
 Kubernetes uses to decide access.
 
@@ -546,14 +546,14 @@ Vue UI hosted on releases.rancher.com. It can be viewed by visiting the running
 steve instance on port 9443 in a browser.
 
 The UI can be enabled and customized by passing options to
-[NewUIHandler](https://pkg.go.dev/github.com/rancher/steve/pkg/ui#NewUIHandler).
+[NewUIHandler](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/ui#NewUIHandler).
 For example, if you have an alternative index.html file, add the file to
 a directory called `./ui`, then create a route that serves a custom UI handler:
 
 ```go
 import (
 	"net/http"
-	"github.com/rancher/steve/pkg/ui"
+	"github.com/oneblock-ai/steve/v2/pkg/ui"
 	"github.com/gorilla/mux"
 )
 
@@ -582,7 +582,7 @@ secrets:
 ```go
 import (
 	"context"
-	"github.com/rancher/steve/pkg/server"
+	"github.com/oneblock-ai/steve/v2/pkg/server"
 	"k8s.io/apimachinery/pkg/runtime"
 	"github.com/sirupsen/logrus"
 	"k8s.io/apimachinery/pkg/runtime/schema"
@@ -610,7 +610,7 @@ server:
 ```go
 import (
 	"context"
-	"github.com/rancher/steve/pkg/server"
+	"github.com/oneblock-ai/steve/v2/pkg/server"
 )
 
 func run() {
@@ -669,29 +669,29 @@ friendly way.
 
 This feature relies on the concept of [stores](#stores) and the RBAC
 partitioner. The [proxy
-store](https://pkg.go.dev/github.com/rancher/steve/pkg/stores/proxy#Store)
+store](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/stores/proxy#Store)
 provides raw access to Kubernetes and returns data as an
 [unstructured.UnstructuredList](https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1/unstructured#UnstructuredList).
 The
-[partitioner](https://pkg.go.dev/github.com/rancher/steve/pkg/stores/partition#Partitioner)
+[partitioner](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/stores/partition#Partitioner)
 calls the
 proxy store in parallel for each segment of resources the user has access to,
 such as for each namespace. The partitioner feeds the results of each parallelized
 request into a stream of
 [unstructured.Unstructured](https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1/unstructured#Unstructured).
 From here, the list is passed to the
-[listprocessor](https://pkg.go.dev/github.com/rancher/steve/pkg/stores/partition/listprocessor)
+[listprocessor](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/stores/partition/listprocessor)
 to filter, sort, and paginate the list. The partition store formats the list as
 a
-[types.APIObjectList](https://pkg.go.dev/github.com/rancher/apiserver/pkg/types#APIObjectList)
+[types.APIObjectList](https://pkg.go.dev/github.com/oneblock-ai/apiserver/v2/pkg/types#APIObjectList)
 and it is returned up the chain of nested stores.
 
 Most stores in steve are implementations of the apiserver
-[Store](https://pkg.go.dev/github.com/rancher/apiserver/pkg/types#Store)
+[Store](https://pkg.go.dev/github.com/oneblock-ai/apiserver/v2/pkg/types#Store)
 interface, which returns apiserver
-[types](https://pkg.go.dev/github.com/rancher/apiserver/pkg/types). The
+[types](https://pkg.go.dev/github.com/oneblock-ai/apiserver/v2/pkg/types). The
 partitioner implements its own store type called
-[UnstructuredStore](https://pkg.go.dev/github.com/rancher/steve/pkg/stores/partition#UnstructuredStore)
+[UnstructuredStore](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/stores/partition#UnstructuredStore)
 which returns
 [unstructured.Unstructured](https://pkg.go.dev/k8s.io/apimachinery/pkg/apis/meta/v1/unstructured#Unstructured)
 objects. The reason for this is that the filtering and sorting functions in the
@@ -736,7 +736,7 @@ Each table test runs several requests, so they are effectively each a bundle of
 tests. Each table test has a list of `apiOps` which each specify the request
 and the user running it, a list of `access` maps which declares the users
 corresponding to each request and controls the
-[AccessSet](https://pkg.go.dev/github.com/rancher/steve/pkg/accesscontrol#AccessSet)
+[AccessSet](https://pkg.go.dev/github.com/oneblock-ai/steve/v2/pkg/accesscontrol#AccessSet)
 the user has, the `partitions` the users have access to, and the `objects` in
 each partition. The requests in `apiOps` are run sequentially, and each item in
 the lists `want`, `wantCache`, and `wantListCalls` correlate to the expected

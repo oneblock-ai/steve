@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
+	"github.com/oneblock-ai/steve/v2/pkg/auth"
 	"github.com/rancher/remotedialer"
-	"github.com/rancher/steve/pkg/auth"
 	"github.com/sirupsen/logrus"
 )
 

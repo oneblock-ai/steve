@@ -3,8 +3,8 @@ package metrics
 import (
 	"time"
 
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/steve/pkg/metrics"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
+	"github.com/oneblock-ai/steve/v2/pkg/metrics"
 )
 
 type Store struct {

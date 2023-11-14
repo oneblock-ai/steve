@@ -2,9 +2,9 @@ package handler
 
 import (
 	"github.com/gorilla/mux"
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/steve/pkg/attributes"
-	"github.com/rancher/steve/pkg/schema"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
+	"github.com/oneblock-ai/steve/v2/pkg/attributes"
+	"github.com/oneblock-ai/steve/v2/pkg/schema"
 )
 
 func k8sAPI(sf schema.Factory, apiOp *types.APIRequest) {

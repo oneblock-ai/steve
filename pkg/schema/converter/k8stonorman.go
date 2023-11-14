@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/rancher/apiserver/pkg/types"
-	v1 "github.com/rancher/wrangler/pkg/generated/controllers/apiextensions.k8s.io/v1"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
+	v1 "github.com/rancher/wrangler/v2/pkg/generated/controllers/apiextensions.k8s.io/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/client-go/discovery"
 )

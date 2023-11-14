@@ -2,11 +2,12 @@ package schema
 
 import (
 	"context"
-	"github.com/stretchr/testify/assert"
 	"testing"
 
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/wrangler/pkg/schemas"
+	"github.com/stretchr/testify/assert"
+
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
+	"github.com/rancher/wrangler/v2/pkg/schemas"
 	k8sSchema "k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apiserver/pkg/authentication/user"
 )

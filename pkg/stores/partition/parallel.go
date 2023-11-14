@@ -5,7 +5,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 
-	"github.com/rancher/apiserver/pkg/types"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 
 	"golang.org/x/sync/errgroup"
 	"golang.org/x/sync/semaphore"

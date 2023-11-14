@@ -1,14 +1,15 @@
 package converter
 
 import (
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/steve/pkg/attributes"
-	"github.com/rancher/wrangler/pkg/data/convert"
-	"github.com/rancher/wrangler/pkg/schemas"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
+	"github.com/rancher/wrangler/v2/pkg/data/convert"
+	"github.com/rancher/wrangler/v2/pkg/schemas"
 	"github.com/sirupsen/logrus"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/client-go/discovery"
 	"k8s.io/kube-openapi/pkg/util/proto"
+
+	"github.com/oneblock-ai/steve/v2/pkg/attributes"
 )
 
 func modelToSchema(modelName string, k *proto.Kind) *types.APISchema {

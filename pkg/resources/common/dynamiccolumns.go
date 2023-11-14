@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/steve/pkg/attributes"
-	"github.com/rancher/wrangler/pkg/ratelimit"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
+	"github.com/oneblock-ai/steve/v2/pkg/attributes"
+	"github.com/rancher/wrangler/v2/pkg/ratelimit"
 	"k8s.io/apimachinery/pkg/apis/meta/internalversion"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	metav1beta1 "k8s.io/apimachinery/pkg/apis/meta/v1beta1"

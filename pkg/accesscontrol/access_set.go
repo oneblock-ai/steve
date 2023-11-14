@@ -3,8 +3,8 @@ package accesscontrol
 import (
 	"sort"
 
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/steve/pkg/attributes"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
+	"github.com/oneblock-ai/steve/v2/pkg/attributes"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/util/sets"
 )

@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/rancher/apiserver/pkg/urlbuilder"
+	"github.com/oneblock-ai/apiserver/v2/pkg/urlbuilder"
 )
 
 type RouterFunc func(h Handlers) http.Handler

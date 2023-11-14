@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 
 	"github.com/adrg/xdg"
-	"github.com/rancher/apiserver/pkg/store/empty"
-	"github.com/rancher/apiserver/pkg/types"
+	"github.com/oneblock-ai/apiserver/v2/pkg/store/empty"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 	"k8s.io/apiserver/pkg/endpoints/request"
 )
 

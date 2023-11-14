@@ -7,12 +7,12 @@ import (
 	"sort"
 	"time"
 
-	v1 "github.com/rancher/wrangler/pkg/generated/controllers/rbac/v1"
+	v1 "github.com/rancher/wrangler/v2/pkg/generated/controllers/rbac/v1"
 	"k8s.io/apimachinery/pkg/util/cache"
 	"k8s.io/apiserver/pkg/authentication/user"
 )
 
-//go:generate mockgen --build_flags=--mod=mod -package fake -destination fake/AccessSetLookup.go "github.com/rancher/steve/pkg/accesscontrol" AccessSetLookup
+//go:generate mockgen --build_flags=--mod=mod -package fake -destination fake/AccessSetLookup.go "github.com/oneblock-ai/steve/v2/pkg/accesscontrol" AccessSetLookup
 
 type AccessSetLookup interface {
 	AccessFor(user user.Info) *AccessSet

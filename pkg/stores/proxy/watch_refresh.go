@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/rancher/apiserver/pkg/types"
-	"github.com/rancher/steve/pkg/accesscontrol"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
+	"github.com/oneblock-ai/steve/v2/pkg/accesscontrol"
 	"k8s.io/apiserver/pkg/endpoints/request"
 )
 

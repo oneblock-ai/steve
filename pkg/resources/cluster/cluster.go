@@ -4,19 +4,20 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/rancher/apiserver/pkg/store/empty"
-	"github.com/rancher/apiserver/pkg/types"
+	"github.com/oneblock-ai/apiserver/v2/pkg/store/empty"
+	"github.com/oneblock-ai/apiserver/v2/pkg/types"
 	detector "github.com/rancher/kubernetes-provider-detector"
-	"github.com/rancher/steve/pkg/accesscontrol"
-	"github.com/rancher/steve/pkg/attributes"
-	steveschema "github.com/rancher/steve/pkg/schema"
-	"github.com/rancher/steve/pkg/stores/proxy"
-	"github.com/rancher/wrangler/pkg/genericcondition"
-	"github.com/rancher/wrangler/pkg/schemas"
+	"github.com/rancher/wrangler/v2/pkg/genericcondition"
+	"github.com/rancher/wrangler/v2/pkg/schemas"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	schema2 "k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/version"
 	"k8s.io/client-go/discovery"
+
+	"github.com/oneblock-ai/steve/v2/pkg/accesscontrol"
+	"github.com/oneblock-ai/steve/v2/pkg/attributes"
+	steveschema "github.com/oneblock-ai/steve/v2/pkg/schema"
+	"github.com/oneblock-ai/steve/v2/pkg/stores/proxy"
 )
 
 func Register(ctx context.Context, apiSchemas *types.APISchemas, cg proxy.ClientGetter, schemaFactory steveschema.Factory) {

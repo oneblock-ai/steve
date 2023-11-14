@@ -3,12 +3,12 @@ package cli
 import (
 	"context"
 
-	steveauth "github.com/rancher/steve/pkg/auth"
-	authcli "github.com/rancher/steve/pkg/auth/cli"
-	"github.com/rancher/steve/pkg/server"
-	"github.com/rancher/steve/pkg/ui"
-	"github.com/rancher/wrangler/pkg/kubeconfig"
-	"github.com/rancher/wrangler/pkg/ratelimit"
+	steveauth "github.com/oneblock-ai/steve/v2/pkg/auth"
+	authcli "github.com/oneblock-ai/steve/v2/pkg/auth/cli"
+	"github.com/oneblock-ai/steve/v2/pkg/server"
+	"github.com/oneblock-ai/steve/v2/pkg/ui"
+	"github.com/rancher/wrangler/v2/pkg/kubeconfig"
+	"github.com/rancher/wrangler/v2/pkg/ratelimit"
 	"github.com/urfave/cli"
 )
 

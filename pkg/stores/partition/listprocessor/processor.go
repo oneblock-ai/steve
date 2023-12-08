@@ -24,7 +24,7 @@ const (
 	pageParam               = "page"
 	revisionParam           = "revision"
 	projectsOrNamespacesVar = "projectsornamespaces"
-	projectIDFieldLabel     = "field.cattle.io/projectId"
+	projectIDFieldLabel     = "field.oneblock.ai/projectId"
 
 	orOp  = ","
 	notOp = "!"

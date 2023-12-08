@@ -7,10 +7,6 @@ import (
 	"time"
 
 	"github.com/oneblock-ai/apiserver/v2/pkg/types"
-	"github.com/oneblock-ai/steve/v2/pkg/attributes"
-	"github.com/oneblock-ai/steve/v2/pkg/resources/common"
-	schema2 "github.com/oneblock-ai/steve/v2/pkg/schema"
-	"github.com/oneblock-ai/steve/v2/pkg/schema/converter"
 	apiextcontrollerv1 "github.com/rancher/wrangler/v2/pkg/generated/controllers/apiextensions.k8s.io/v1"
 	v1 "github.com/rancher/wrangler/v2/pkg/generated/controllers/apiregistration.k8s.io/v1"
 	"github.com/sirupsen/logrus"
@@ -22,6 +18,11 @@ import (
 	"k8s.io/client-go/discovery"
 	authorizationv1client "k8s.io/client-go/kubernetes/typed/authorization/v1"
 	apiv1 "k8s.io/kube-aggregator/pkg/apis/apiregistration/v1"
+
+	"github.com/oneblock-ai/steve/v2/pkg/attributes"
+	"github.com/oneblock-ai/steve/v2/pkg/resources/common"
+	schema2 "github.com/oneblock-ai/steve/v2/pkg/schema"
+	"github.com/oneblock-ai/steve/v2/pkg/schema/converter"
 )
 
 var (

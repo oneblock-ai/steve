@@ -4,12 +4,6 @@ import (
 	"strings"
 
 	"github.com/oneblock-ai/apiserver/v2/pkg/types"
-	"github.com/oneblock-ai/steve/v2/pkg/accesscontrol"
-	"github.com/oneblock-ai/steve/v2/pkg/attributes"
-	"github.com/oneblock-ai/steve/v2/pkg/schema"
-	metricsStore "github.com/oneblock-ai/steve/v2/pkg/stores/metrics"
-	"github.com/oneblock-ai/steve/v2/pkg/stores/proxy"
-	"github.com/oneblock-ai/steve/v2/pkg/summarycache"
 	"github.com/rancher/wrangler/v2/pkg/data"
 	corecontrollers "github.com/rancher/wrangler/v2/pkg/generated/controllers/core/v1"
 	"github.com/rancher/wrangler/v2/pkg/slice"
@@ -18,6 +12,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	schema2 "k8s.io/apimachinery/pkg/runtime/schema"
+
+	"github.com/oneblock-ai/steve/v2/pkg/accesscontrol"
+	"github.com/oneblock-ai/steve/v2/pkg/attributes"
+	"github.com/oneblock-ai/steve/v2/pkg/schema"
+	metricsStore "github.com/oneblock-ai/steve/v2/pkg/stores/metrics"
+	"github.com/oneblock-ai/steve/v2/pkg/stores/proxy"
+	"github.com/oneblock-ai/steve/v2/pkg/summarycache"
 )
 
 func DefaultTemplate(clientGetter proxy.ClientGetter,
@@ -32,7 +33,7 @@ func DefaultTemplate(clientGetter proxy.ClientGetter,
 
 func selfLink(gvr schema2.GroupVersionResource, meta metav1.Object) (prefix string) {
 	buf := &strings.Builder{}
-	if gvr.Group == "management.cattle.io" && gvr.Version == "v3" {
+	if gvr.Group == "management.oneblock.ai" && gvr.Version == "v1" {
 		buf.WriteString("/v1/")
 		buf.WriteString(gvr.Group)
 		buf.WriteString(".")

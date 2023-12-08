@@ -2,6 +2,7 @@ package cluster
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/oneblock-ai/apiserver/v2/pkg/store/empty"
@@ -20,8 +21,15 @@ import (
 	"github.com/oneblock-ai/steve/v2/pkg/stores/proxy"
 )
 
+const (
+	clusterApiGroup       = "management.oneblock.ai"
+	clusterApiVersion     = "v1"
+	clusterKindName       = "Cluster"
+	clusterSchemaTypeName = "management.oneblock.ai.cluster"
+)
+
 func Register(ctx context.Context, apiSchemas *types.APISchemas, cg proxy.ClientGetter, schemaFactory steveschema.Factory) {
-	apiSchemas.InternalSchemas.TypeName("management.cattle.io.cluster", Cluster{})
+	apiSchemas.InternalSchemas.TypeName(clusterSchemaTypeName, Cluster{})
 
 	apiSchemas.MustImportAndCustomize(&ApplyInput{}, nil)
 	apiSchemas.MustImportAndCustomize(&ApplyOutput{}, nil)
@@ -41,9 +49,9 @@ func Register(ctx context.Context, apiSchemas *types.APISchemas, cg proxy.Client
 			discovery: discoveryClient(cg),
 		}
 		attributes.SetGVK(schema, schema2.GroupVersionKind{
-			Group:   "management.cattle.io",
-			Version: "v3",
-			Kind:    "Cluster",
+			Group:   clusterApiGroup,
+			Version: clusterApiVersion,
+			Kind:    clusterKindName,
 		})
 
 		schema.ActionHandlers = map[string]http.Handler{
@@ -87,7 +95,7 @@ func AddApply(apiSchemas *types.APISchemas, schema *types.APISchema) {
 	if _, ok := schema.ActionHandlers["apply"]; ok {
 		return
 	}
-	cluster := apiSchemas.LookupSchema("management.cattle.io.cluster")
+	cluster := apiSchemas.LookupSchema(clusterSchemaTypeName)
 	if cluster == nil {
 		return
 	}
@@ -136,8 +144,8 @@ func (s *Store) getLocal() types.APIObject {
 		ID: "local",
 		Object: &Cluster{
 			TypeMeta: metav1.TypeMeta{
-				Kind:       "Cluster",
-				APIVersion: "management.cattle.io/v3",
+				Kind:       clusterKindName,
+				APIVersion: fmt.Sprintf("%s/%s", clusterApiGroup, clusterApiVersion),
 			},
 			ObjectMeta: metav1.ObjectMeta{
 				Name: "local",
@@ -178,7 +186,7 @@ func (s *Store) Watch(apiOp *types.APIRequest, schema *types.APISchema, w types.
 	result := make(chan types.APIEvent, 1)
 	result <- types.APIEvent{
 		Name:         "local",
-		ResourceType: "management.cattle.io.clusters",
+		ResourceType: "management.oneblock.ai.clusters",
 		ID:           "local",
 		Object:       s.getLocal(),
 	}

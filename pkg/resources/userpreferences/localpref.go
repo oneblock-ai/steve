@@ -12,10 +12,6 @@ import (
 	"k8s.io/apiserver/pkg/endpoints/request"
 )
 
-var (
-	rancherSchema = "management.cattle.io.preference"
-)
-
 type localStore struct {
 	empty.Store
 }

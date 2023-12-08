@@ -1,6 +1,8 @@
 steve
 =====
 
+> This a folk version of [rancher/steve](https://github.com/rancher/steve), we maintain it for the [1Block.AI](https://1block.ai) projects only, please consider using the upstream version if needed.
+
 Steve is a lightweight API proxy for Kubernetes whose aim is to create an
 interface layer suitable for dashboards to efficiently interact with
 Kubernetes.

@@ -48,16 +48,19 @@ type Server struct {
 
 	aggregationSecretNamespace string
 	aggregationSecretName      string
+	startAggregation           bool
 }
 
 type Options struct {
 	// Controllers If the controllers are passed in the caller must also start the controllers
-	Controllers                *Controllers
-	ClientFactory              *client.Factory
-	AccessSetLookup            accesscontrol.AccessSetLookup
-	AuthMiddleware             auth.Middleware
-	Next                       http.Handler
-	Router                     router.RouterFunc
+	Controllers     *Controllers
+	ClientFactory   *client.Factory
+	AccessSetLookup accesscontrol.AccessSetLookup
+	AuthMiddleware  auth.Middleware
+	Next            http.Handler
+	Router          router.RouterFunc
+
+	StartAggregation           bool
 	AggregationSecretNamespace string
 	AggregationSecretName      string
 	ClusterRegistry            string
@@ -199,7 +202,9 @@ func (c *Server) ListenAndServe(ctx context.Context, httpsPort, httpPort int, op
 		opts.Secrets = c.controllers.Core.Secret()
 	}
 
-	c.StartAggregation(ctx)
+	if c.startAggregation {
+		c.StartAggregation(ctx)
+	}
 
 	if len(opts.TLSListenerConfig.SANs) == 0 {
 		opts.TLSListenerConfig.SANs = []string{"127.0.0.1"}

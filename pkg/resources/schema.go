@@ -67,7 +67,7 @@ func DefaultSchemaTemplates(cf *client.Factory,
 			Formatter: formatters.Pod,
 		},
 		{
-			ID: "management.cattle.io.cluster",
+			ID: "management.oneblock.ai.cluster",
 			Customize: func(apiSchema *types.APISchema) {
 				cluster.AddApply(baseSchemas, apiSchema)
 			},

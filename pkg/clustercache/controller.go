@@ -6,8 +6,6 @@ import (
 	"time"
 
 	"github.com/oneblock-ai/apiserver/v2/pkg/types"
-	"github.com/oneblock-ai/steve/v2/pkg/attributes"
-	"github.com/oneblock-ai/steve/v2/pkg/schema"
 	"github.com/rancher/wrangler/v2/pkg/merr"
 	"github.com/rancher/wrangler/v2/pkg/summary/client"
 	"github.com/rancher/wrangler/v2/pkg/summary/informer"
@@ -19,6 +17,9 @@ import (
 	"k8s.io/client-go/dynamic"
 	"k8s.io/client-go/tools/cache"
 	"k8s.io/client-go/util/workqueue"
+
+	"github.com/oneblock-ai/steve/v2/pkg/attributes"
+	"github.com/oneblock-ai/steve/v2/pkg/schema"
 )
 
 type Handler func(gvr schema2.GroupVersionKind, key string, obj runtime.Object) error
@@ -66,7 +67,9 @@ func NewClusterCache(ctx context.Context, dynamicClient dynamic.Interface) Clust
 		ctx:           ctx,
 		summaryClient: client.NewForDynamicClient(dynamicClient),
 		watchers:      map[schema2.GroupVersionKind]*watcher{},
-		workqueue:     workqueue.NewNamedDelayingQueue("cluster-cache"),
+		workqueue: workqueue.NewDelayingQueueWithConfig(workqueue.DelayingQueueConfig{
+			Name: "cluster-cache",
+		}),
 	}
 	go c.start()
 	return c

@@ -7,7 +7,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/oneblock-ai/steve/v2/pkg/stores/proxy"
 	"github.com/rancher/wrangler/v2/pkg/condition"
 	"github.com/rancher/wrangler/v2/pkg/randomtoken"
 	"github.com/rancher/wrangler/v2/pkg/schemas/validation"
@@ -24,12 +23,14 @@ import (
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 	clientcmdapi "k8s.io/client-go/tools/clientcmd/api"
+
+	"github.com/oneblock-ai/steve/v2/pkg/stores/proxy"
 )
 
 const (
-	roleLabel  = "pod-impersonation.cattle.io/cluster-role"
-	keyLabel   = "pod-impersonation.cattle.io/key"
-	TokenLabel = "pod-impersonation.cattle.io/token"
+	roleLabel  = "pod-impersonation.oneblock.ai/cluster-role"
+	keyLabel   = "pod-impersonation.oneblock.ai/key"
+	TokenLabel = "pod-impersonation.oneblock.ai/token"
 )
 
 type PodImpersonation struct {

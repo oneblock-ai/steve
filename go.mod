@@ -7,10 +7,11 @@ replace (
 	github.com/knative/pkg => github.com/rancher/pkg v0.0.0-20181214184433-b04c0947ad2f
 	github.com/matryer/moq => github.com/rancher/moq v0.0.0-20190404221404-ee5226d43009
 	github.com/rancher/dynamiclistener => github.com/oneblock-ai/dynamiclistener v0.0.0-20240125044100-a83225f32ede
+	k8s.io/client-go => github.com/rancher/client-go v1.28.6-rancher1
+
 	k8s.io/api => k8s.io/api v0.28.6
 	k8s.io/apimachinery => k8s.io/apimachinery v0.28.6
 	k8s.io/apiserver => k8s.io/apiserver v0.28.6
-	k8s.io/client-go => github.com/rancher/client-go v1.28.6-rancher1
 	k8s.io/kube-openapi => k8s.io/kube-openapi v0.0.0-20230717233707-2695361300d9
 )
 

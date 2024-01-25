@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"errors"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -33,7 +34,10 @@ var ExistingContext = ToMiddleware(AuthenticatorFunc(func(req *http.Request) (us
 	return user, ok, nil
 }))
 
-const CattleAuthFailed = "X-API-Cattle-Auth-Failed"
+const (
+	AuthFailed = "X-API-Auth-Failed"
+	CookieName = "OB_SESS"
+)
 
 type Authenticator interface {
 	Authenticate(req *http.Request) (user.Info, bool, error)
@@ -123,10 +127,10 @@ func (w *webhookAuth) Authenticate(req *http.Request) (user.Info, bool, error) {
 	}
 
 	if token == "" {
-		cookie, err := req.Cookie("R_SESS")
-		if err != nil && err != http.ErrNoCookie {
+		cookie, err := req.Cookie(CookieName)
+		if err != nil && !errors.Is(err, http.ErrNoCookie) {
 			return nil, false, err
-		} else if err != http.ErrNoCookie && len(cookie.Value) > 0 {
+		} else if !errors.Is(err, http.ErrNoCookie) && len(cookie.Value) > 0 {
 			token = "cookie://" + cookie.Value
 		}
 	}
@@ -156,7 +160,7 @@ func ToMiddleware(auth Authenticator) Middleware {
 						"system:cattle:error",
 					},
 				}
-				ctx = request.WithValue(ctx, CattleAuthFailed, "true")
+				ctx = request.WithValue(ctx, AuthFailed, "true")
 			} else if !ok {
 				info = &user.DefaultInfo{
 					Name: "system:unauthenticated",

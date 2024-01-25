@@ -33,7 +33,7 @@ func DefaultTemplate(clientGetter proxy.ClientGetter,
 
 func selfLink(gvr schema2.GroupVersionResource, meta metav1.Object) (prefix string) {
 	buf := &strings.Builder{}
-	if gvr.Group == "management.cattle.io" && gvr.Version == "v3" {
+	if gvr.Group == "management.oneblock.ai" && gvr.Version == "v1" {
 		buf.WriteString("/v1/")
 		buf.WriteString(gvr.Group)
 		buf.WriteString(".")

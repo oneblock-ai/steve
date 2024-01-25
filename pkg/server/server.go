@@ -48,6 +48,7 @@ type Server struct {
 
 	aggregationSecretNamespace string
 	aggregationSecretName      string
+	startAggregation           bool
 }
 
 type Options struct {
@@ -60,6 +61,7 @@ type Options struct {
 	Router                     router.RouterFunc
 	AggregationSecretNamespace string
 	AggregationSecretName      string
+	StartAggregation           bool
 	ClusterRegistry            string
 	ServerVersion              string
 }
@@ -199,7 +201,9 @@ func (c *Server) ListenAndServe(ctx context.Context, httpsPort, httpPort int, op
 		opts.Secrets = c.controllers.Core.Secret()
 	}
 
-	c.StartAggregation(ctx)
+	if c.startAggregation {
+		c.StartAggregation(ctx)
+	}
 
 	if len(opts.TLSListenerConfig.SANs) == 0 {
 		opts.TLSListenerConfig.SANs = []string{"127.0.0.1"}

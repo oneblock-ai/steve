@@ -68,7 +68,9 @@ func NewClusterCache(ctx context.Context, dynamicClient dynamic.Interface) Clust
 		ctx:           ctx,
 		summaryClient: client.NewForDynamicClient(dynamicClient),
 		watchers:      map[schema2.GroupVersionKind]*watcher{},
-		workqueue:     workqueue.NewNamedDelayingQueue("cluster-cache"),
+		workqueue: workqueue.NewDelayingQueueWithConfig(workqueue.DelayingQueueConfig{
+			Name: "cluster-cache",
+		}),
 	}
 	go c.start()
 	return c

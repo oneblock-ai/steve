@@ -7,20 +7,25 @@ import (
 	"github.com/rancher/apiserver/pkg/store/empty"
 	"github.com/rancher/apiserver/pkg/types"
 	detector "github.com/rancher/kubernetes-provider-detector"
-	"github.com/rancher/steve/pkg/accesscontrol"
-	"github.com/rancher/steve/pkg/attributes"
-	steveschema "github.com/rancher/steve/pkg/schema"
-	"github.com/rancher/steve/pkg/stores/proxy"
 	"github.com/rancher/wrangler/v3/pkg/genericcondition"
 	"github.com/rancher/wrangler/v3/pkg/schemas"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	schema2 "k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/version"
 	"k8s.io/client-go/discovery"
+
+	"github.com/rancher/steve/pkg/accesscontrol"
+	"github.com/rancher/steve/pkg/attributes"
+	steveschema "github.com/rancher/steve/pkg/schema"
+	"github.com/rancher/steve/pkg/stores/proxy"
+)
+
+const (
+	clusterTypeName = "management.oneblock.ai.cluster"
 )
 
 func Register(ctx context.Context, apiSchemas *types.APISchemas, cg proxy.ClientGetter, schemaFactory steveschema.Factory) {
-	apiSchemas.InternalSchemas.TypeName("management.cattle.io.cluster", Cluster{})
+	apiSchemas.InternalSchemas.TypeName(clusterTypeName, Cluster{})
 
 	apiSchemas.MustImportAndCustomize(&ApplyInput{}, nil)
 	apiSchemas.MustImportAndCustomize(&ApplyOutput{}, nil)
@@ -40,8 +45,8 @@ func Register(ctx context.Context, apiSchemas *types.APISchemas, cg proxy.Client
 			discovery: discoveryClient(cg),
 		}
 		attributes.SetGVK(schema, schema2.GroupVersionKind{
-			Group:   "management.cattle.io",
-			Version: "v3",
+			Group:   "management.oneblock.ai",
+			Version: "v1",
 			Kind:    "Cluster",
 		})
 
@@ -86,7 +91,7 @@ func AddApply(apiSchemas *types.APISchemas, schema *types.APISchema) {
 	if _, ok := schema.ActionHandlers["apply"]; ok {
 		return
 	}
-	cluster := apiSchemas.LookupSchema("management.cattle.io.cluster")
+	cluster := apiSchemas.LookupSchema(clusterTypeName)
 	if cluster == nil {
 		return
 	}
@@ -136,7 +141,7 @@ func (s *Store) getLocal() types.APIObject {
 		Object: &Cluster{
 			TypeMeta: metav1.TypeMeta{
 				Kind:       "Cluster",
-				APIVersion: "management.cattle.io/v3",
+				APIVersion: "management.oneblock.ai/v1",
 			},
 			ObjectMeta: metav1.ObjectMeta{
 				Name: "local",
@@ -177,7 +182,7 @@ func (s *Store) Watch(apiOp *types.APIRequest, schema *types.APISchema, w types.
 	result := make(chan types.APIEvent, 1)
 	result <- types.APIEvent{
 		Name:         "local",
-		ResourceType: "management.cattle.io.clusters",
+		ResourceType: "management.oneblock.ai.clusters",
 		ID:           "local",
 		Object:       s.getLocal(),
 	}

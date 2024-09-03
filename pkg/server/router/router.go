@@ -25,6 +25,8 @@ func Routes(h Handlers) http.Handler {
 	m.Path("/").Handler(h.APIRoot).HeadersRegexp("Accept", ".*json.*")
 	m.Path("/{name:v1}").Handler(h.APIRoot)
 
+	m.Path("/v1/{type}").Queries("link", "{link}").Handler(h.K8sResource)
+	m.Path("/v1/{type}").Queries("action", "{action}").Handler(h.K8sResource)
 	m.Path("/v1/{type}").Handler(h.K8sResource)
 	m.Path("/v1/{type}/{nameorns}").Queries("link", "{link}").Handler(h.K8sResource)
 	m.Path("/v1/{type}/{nameorns}").Queries("action", "{action}").Handler(h.K8sResource)

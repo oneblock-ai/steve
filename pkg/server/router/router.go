@@ -33,6 +33,8 @@ func Routes(h Handlers) http.Handler {
 		m.PathPrefix("/ext/").Handler(http.StripPrefix("/ext", h.ExtensionAPIServer))
 	}
 
+	m.Path("/v1/{type}").Queries("link", "{link}").Handler(h.K8sResource)
+	m.Path("/v1/{type}").Queries("action", "{action}").Handler(h.K8sResource)
 	m.Path("/v1/{type}").Handler(h.K8sResource)
 	m.Path("/v1/{type}/{nameorns}").Queries("link", "{link}").Handler(h.K8sResource)
 	m.Path("/v1/{type}/{nameorns}").Queries("action", "{action}").Handler(h.K8sResource)

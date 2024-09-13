@@ -1,14 +1,12 @@
 module github.com/rancher/steve
 
-go 1.22.0
-
-toolchain go1.22.2
+go 1.22.7
 
 replace (
 	github.com/crewjam/saml => github.com/rancher/saml v0.2.0
 	github.com/knative/pkg => github.com/rancher/pkg v0.0.0-20181214184433-b04c0947ad2f
 	github.com/matryer/moq => github.com/rancher/moq v0.0.0-20190404221404-ee5226d43009
-	github.com/rancher/apiserver => github.com/oneblock-ai/apiserver v0.0.0-20240725053224-0cf9c4507e4d
+	github.com/rancher/apiserver => github.com/oneblock-ai/apiserver v0.0.0-20240806034601-b41fbdc3179b
 )
 
 require (
@@ -46,8 +44,8 @@ require (
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/blang/semver/v4 v4.0.0 // indirect
-	github.com/bytedance/sonic v1.11.9 // indirect
-	github.com/bytedance/sonic/loader v0.1.1 // indirect
+	github.com/bytedance/sonic v1.12.0 // indirect
+	github.com/bytedance/sonic/loader v0.2.0 // indirect
 	github.com/cenkalti/backoff/v4 v4.2.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/cloudwego/base64x v0.1.4 // indirect

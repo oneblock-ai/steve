@@ -11,14 +11,15 @@ import (
 	"time"
 
 	"github.com/rancher/lasso/pkg/log"
-	"github.com/rancher/steve/pkg/sqlcache/db"
-	"github.com/rancher/steve/pkg/sqlcache/encryption"
-	"github.com/rancher/steve/pkg/sqlcache/informer"
 	"k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/dynamic"
 	"k8s.io/client-go/tools/cache"
+
+	"github.com/rancher/steve/pkg/sqlcache/db"
+	"github.com/rancher/steve/pkg/sqlcache/encryption"
+	"github.com/rancher/steve/pkg/sqlcache/informer"
 )
 
 // EncryptAllEnvVar is set to "true" if users want all types' data blobs to be encrypted in SQLite
@@ -131,7 +132,7 @@ func (f *CacheFactory) CacheFor(ctx context.Context, fields [][]string, transfor
 				// expected, continue without logging
 				return
 			}
-			cache.DefaultWatchErrorHandler(r, err)
+			cache.DefaultWatchErrorHandler(ctx, r, err)
 		})
 		if err != nil {
 			return Cache{}, err

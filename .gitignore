@@ -8,6 +8,7 @@
 *.swp
 .idea
 steve
+vendor
 
 informer_object_cache.db
 informer_object_cache.db-shm
